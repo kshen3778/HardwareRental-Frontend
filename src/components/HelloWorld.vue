@@ -7,8 +7,8 @@
           <br>
           Returned: {{value.owner.returned}}
           <div v-if="value.owner.returned == true">
-            Return Amount: <input type="number" name="amount" v-model="returnAmount"><br>
-            <button type="button" v-on:click="refund(key)">Confirm Return</button>
+            Charge: <input type="number" name="amount" v-model="chargeAmount"><br>
+            <button type="button" v-on:click="confirmReturn(key)">Confirm Return</button>
           </div>
         </div>
         <br>
@@ -24,7 +24,7 @@ export default {
   data () {
     return {
       products: {},
-      returnAmount: 0,
+      chargeAmount: 0,
     }
   },
 
@@ -44,10 +44,10 @@ export default {
         })
       },
 
-      refund(id) {
-        axios.post('https://hardwarerental-kshen3778.c9users.io/refund', {
-          itemidfield: id,
-          amount: this.returnAmount
+      confirmReturn(id) {
+        axios.post('https://hardwarerental-kshen3778.c9users.io/returnAndCharge', {
+          itemid: id,
+          amount: this.chargeAmount
         })
         .then((resp) => {
           console.log(resp)
