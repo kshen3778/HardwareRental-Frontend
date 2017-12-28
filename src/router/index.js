@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import SignOut from '@/components/SignOut'
 import Return from '@/components/Return'
+import ManageItems from '@/components/ManageItems'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/return',
       name: 'Return',
       component: Return
+    },
+    {
+      path: '/items',
+      name: 'ManageItems',
+      component: ManageItems
     }
   ]
 })
