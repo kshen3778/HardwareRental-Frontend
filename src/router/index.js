@@ -4,6 +4,8 @@ import HelloWorld from '@/components/HelloWorld'
 import SignOut from '@/components/SignOut'
 import Return from '@/components/Return'
 import ManageItems from '@/components/ManageItems'
+import NewUser from '@/components/NewUser'
+import Login from '@/components/Login'
 
 Vue.use(Router)
 
@@ -28,6 +30,16 @@ export default new Router({
       path: '/items',
       name: 'ManageItems',
       component: ManageItems
+    },
+    {
+      path: '/newuser',
+      name: 'NewUser',
+      component: NewUser
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     }
   ]
 })
