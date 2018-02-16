@@ -38,12 +38,13 @@ export default {
 
   methods: {
 
-    returnItem() {
-      axios.post('https://hardwarerental-kshen3778.c9users.io/returnItem', {
-        itemid: this.itemid
+    login() {
+      axios.post('https://hardwarerental-kshen3778.c9users.io/login', {
+        email: this.email,
+        password: this.password
       })
       .then((resp) => {
-        console.log(resp)
+        console.log(resp);
         this.response = resp.data;
       })
       .catch((err) => {
