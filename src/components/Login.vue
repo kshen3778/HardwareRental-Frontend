@@ -14,6 +14,10 @@
 
     <button type="button" v-on:click="login()">Login</button>
 
+    <br>
+
+    <button type="button" v-on:click="resetPassword()">Forgot Password</button>
+
     {{response}}
   </div>
 
@@ -46,10 +50,29 @@ export default {
       .then((resp) => {
         console.log(resp);
         this.response = resp.data;
+        this.$router.push("Profile");
       })
       .catch((err) => {
         console.log(err)
       })
+    },
+
+    resetPassword(){
+
+      if(this.email.replace(/\s/g,"") != ""){
+        axios.post('https://hardwarerental-kshen3778.c9users.io/resetPassword', {
+          email: this.email
+        })
+        .then((resp) => {
+          console.log(resp);
+          this.response = resp.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }else{
+        this.response = "Please provide the email.";
+      }
     }
 
   }

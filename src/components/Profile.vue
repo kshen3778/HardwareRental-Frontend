@@ -4,6 +4,13 @@
     <br>
     Email: {{user.email}}
     <br>
+
+    <button type="button" v-on:click="resetPassword()">Reset Password</button>
+
+    {{resetResponse}}
+
+    <br>
+
     Update Card:
     <br>
     <card class='stripe-card'
@@ -28,6 +35,7 @@ export default {
   name: 'Profile',
   data () {
     return {
+      resetResponse: "",
       user: null,
       stripeOptions: {
         // see https://stripe.com/docs/stripe.js#element-options for details
@@ -67,12 +75,24 @@ export default {
         .then((resp) => {
           console.log(resp);
           self.response = resp.data;
-          //redirect to the profile page
         })
         .catch((err) => {
           console.log(err);
         })
       });
+    },
+
+    resetPassword(){
+      axios.post('https://hardwarerental-kshen3778.c9users.io/resetPassword', {
+        email: this.user.email
+      })
+      .then((resp) => {
+        console.log(resp);
+        this.resetResponse = resp.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      })
     }
   }
 }
