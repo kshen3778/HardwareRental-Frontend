@@ -7,6 +7,7 @@ import ManageItems from '@/components/ManageItems'
 import NewUser from '@/components/NewUser'
 import Login from '@/components/Login'
 import Profile from '@/components/Profile'
+import Users from '@/components/Users'
 
 Vue.use(Router)
 
@@ -46,6 +47,11 @@ export default new Router({
       path: '/profile',
       name: 'Profile',
       component: Profile
+    },
+    {
+      path: '/users',
+      name: 'Users',
+      component: Users
     }
   ]
 })
