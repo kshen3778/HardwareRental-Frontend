@@ -1,21 +1,37 @@
 <template>
   <div class="hello">
-    <div v-for="(value, key) in users">
-        <div v-if="value">
-          ID: {{key}}
-          <br>
-          Name: {{value.username}}
-          <br>
-          Email: {{value.depositValue}}
-          <br>
-          Charge: <input type="number" name="amount" v-model="value.chargeAmount"><br>
-          <button type="button" v-on:click="charge(key, value.chargeAmount)">Charge</button>
+    <b-list-group>
+      <div v-for="(value, key) in users">
+          <b-list-group-item @click="showCollapse[key] = !showCollapse[key]"
+             :class="showCollapse[key] ? 'collapsed' : null"
+             aria-controls="collapse4"
+             :aria-expanded="showCollapse[key] ? 'true' : 'false'">{{key}}</b-list-group-item>
+
+          <b-collapse v-model="showCollapse[key]" id="collapse4" class="mt-2">
+            <div v-if="value">
+              ID: {{key}}
+              <br>
+              Name: {{value.username}}
+              <br>
+              Email: {{value.depositValue}}
+              <br>
+              Hardware Currently Signed out (ID):
+              <br>
+              <div v-for="(data, key) in value.signOuts">
+                {{key}}
+                <br>
+              </div>
+              <br>
+              Charge: <input type="number" name="amount" v-model="value.chargeAmount"><br>
+              <button type="button" v-on:click="charge(key, value.chargeAmount)">Charge</button>
+              <br>
+            </div>
+          </b-collapse>
 
           <br>
+      </div>
+    </b-list-group>
 
-        </div>
-        <br>
-    </div>
   </div>
 </template>
 
@@ -26,7 +42,8 @@ export default {
   name: 'Users',
   data () {
     return {
-      users: {}
+      users: {},
+      showCollapse: []
     }
   },
 
