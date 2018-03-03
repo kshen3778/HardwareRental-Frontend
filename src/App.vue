@@ -1,6 +1,11 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
+    <router-link to="/">[Dashboard]</router-link>
+    <router-link to="/signOut">[Signout]</router-link>
+    <router-link to="/return">[Return]</router-link>
+    <router-link to="/items">[Manage Items]</router-link>
+    <router-link to="/manageUsers">[Manage Users]</router-link>
     <router-view/>
   </div>
 </template>

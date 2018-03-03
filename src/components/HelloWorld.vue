@@ -2,14 +2,14 @@
   <div class="hello">
     <div v-for="(value, key) in products">
         <div v-if="value">
-          ID: {{key}}  |  Name: {{value.name}}  |  Deposit: {{value.depositValue}}
+          <b> ID: </b> {{key}} ,  <b> Name: </b> {{value.name}}
           <div v-if="value.owner">
-            Owner: {{value.owner.id}}
+            Owner: {{value.owner.email}} ({{value.owner.id}})
             <br>
-            Returned: {{value.owner.returned}}
-            <div v-if="value.owner.returned == true">
-              <button type="button" v-on:click="confirmReturn(key)">Confirm Return</button>
+            <div v-if="value.owner">
+              Returned: No
             </div>
+            <div v-else> Returned: Yes </div>
           </div>
         </div>
         <br>
