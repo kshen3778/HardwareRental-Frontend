@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-on:keyup.enter="signOut()">
     User Id:
     <input type="text" name="username" v-model="username">
     <br>
@@ -10,6 +10,9 @@
     <button type="button" v-on:click="signOut()">SignOut</button>
 
     {{response}}
+
+    <br>
+    <button type="button" v-on:click="clear()">Clear</button>
   </div>
 
 </template>
@@ -32,19 +35,29 @@ export default {
   },
 
   methods: {
+    clear(){
+      this.username = "";
+      this.itemid = "";
+      this.response = "";
+    },
 
     signOut() {
-      axios.post('https://hardwarerental-kshen3778.c9users.io/signOut', {
-        itemid: this.itemid,
-        user: this.username
-      })
-      .then((resp) => {
-        console.log(resp)
-        this.response = resp.data;
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+      if(this.itemid && this.itemid != "" && !format.test(this.itemid)){
+        axios.post('https://hardwarerental-kshen3778.c9users.io/signOut', {
+          itemid: this.itemid,
+          user: this.username
+        })
+        .then((resp) => {
+          console.log(resp)
+          this.response = resp.data;
+        })
+        .catch((err) => {
+          console.log(err)
+        });
+      }else{
+        this.response = "Invalid ID";
+      }
     }
 
   }

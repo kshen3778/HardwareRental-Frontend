@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-on:keyup.enter="returnItem()">
     Item Id:
     <input type="text" name="itemid" v-model="itemid">
     <br>
@@ -29,16 +29,21 @@ export default {
   methods: {
 
     returnItem() {
-      axios.post('https://hardwarerental-kshen3778.c9users.io/returnItem', {
-        itemid: this.itemid
-      })
-      .then((resp) => {
-        console.log(resp)
-        this.response = resp.data;
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+      if(this.itemid && this.itemid != "" && !format.test(this.itemid)){
+        axios.post('https://hardwarerental-kshen3778.c9users.io/returnItem', {
+          itemid: this.itemid
+        })
+        .then((resp) => {
+          console.log(resp)
+          this.response = resp.data;
+        })
+        .catch((err) => {
+          console.log(err)
+        });
+      }else{
+        this.response = "Invalid ID";
+      }
     }
 
   }
